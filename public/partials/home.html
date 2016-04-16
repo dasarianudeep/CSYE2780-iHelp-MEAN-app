@@ -1,0 +1,25 @@
+<div class="row">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">Brand Name</a>
+            </div>
+            
+            <form class="navbar-form navbar-right">
+                <div class="form-group">
+                    <span class="glyphicon glyphicon-user"></span>
+                    <input type="text" name="username" ng-model="user.name" class="form-control" placeholder="Username"/>
+                </div>
+                <div class="form-group">
+                    <span class="glyphicon glyphicon-lock"></span>
+                    <input type="password" name="password" ng-model="user.password" class="form-control" placeholder="Password"/>
+                </div>
+                
+                <button type="button" class="btn btn-info" ng-click = "loginCtrl.validateUser(user)">Sign In</button>
+                
+                <!--<button type="button" class="btn btn-info">Sign Up</button>-->
+                
+            </form>
+        </div>
+    </nav>
+</div>
