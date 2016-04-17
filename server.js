@@ -15,24 +15,6 @@
     var User = require('./app/models/User');
     app.use(express.static(__dirname+'/public'));
     
-    // User.create({
-    //         firstname:'anudeep',
-    //         lastname : 'dasari',
-    //         username : 'admin',
-    //         password : 'pass',
-    //         regno : 9812,
-    //         role : 'customer',
-    //         companies : [{name:'amazon',enterpriseId:1298}],
-    //         isAvail : false
-    // }, function(err, user){
-        
-    //     if(user){
-    //         console.log(user);
-    //     }
-    //     if(err){
-    //         console.log(err);
-    //     }
-    // });
     
     app.get('/', function(req, res){
         
@@ -50,19 +32,19 @@
        User.find({username : req.query.username , password : req.query.password}, function(err, user){
            console.log(user);
            if(user){
-                deferred.resolve(true);     
+                deferred.resolve({isValid:true, uid:user.uid});     
              }
            else if(err){
                console.log(err);
-               deferred.reject(false);
+               deferred.reject({isValid:false});
            }
            
        });
         
        deferred.then(function(val){
-           res.json({isValid:val});
+           res.json(val);
        }, function(val){
-           res.json({isValid:val});
+           res.json(val);
        });
        
     });

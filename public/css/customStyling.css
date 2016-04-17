@@ -2,3 +2,23 @@ body{
     margin:0;
     padding:0;
 }
+
+#chatcompanies tr{
+    
+    cursor : pointer;
+}
+
+#chatpanel{
+    
+    height : 350px;
+}
+
+#chatlist{
+    
+    height : 90%;
+}
+
+#chatmessage{
+    
+    height : 10%;
+}

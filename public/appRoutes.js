@@ -14,6 +14,10 @@
             
         }).when('/search',{
             
+            controller : 'SearchController',
+            controllerAs : 'searchCtrl',
+            templateUrl : './partials/search.html'
+            
         }).otherwise({redirectTo : '/'});
        
         

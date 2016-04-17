@@ -1,24 +1,24 @@
-(function(angular){
+(function(angular) {
     'use strict';
-    
+
     angular.module('iHelpApp')
-           .service('ApplicationContextService', ApplicationContextService);
-    
-    
-    function ApplicationContextService(){
-        
+        .service('ApplicationContextService', ApplicationContextService);
+
+
+    function ApplicationContextService() {
+
         var appContext = {
-            globals : globals
+            globals: globals
         };
-        
+
         return appContext;
-        
-        function globals(){
-            
+
+        function globals() {
+
             return {
-                
+
             };
         }
     }
-    
+
 })(angular);

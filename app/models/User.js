@@ -8,10 +8,9 @@
             lastname : String,
             username : String,
             password : String,
-            regno : Number,
-            role : String,
-            companies : [EnterpriseSchema],
-            isAvail : Boolean
+            uid : Number,
+            enterprise : String,
+            isAvail : Boolean,
         });
         
     module.exports = mongoose.model('User', UserSchema);

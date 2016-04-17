@@ -5,7 +5,9 @@
     
     module.exports = mongoose.Schema({
             name : String,
-            enterpriseId : Number
+            enterpriseId : Number,
+            enterpriseadmin : String
+            
             
         });
     
