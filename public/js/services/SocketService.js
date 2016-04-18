@@ -22,8 +22,13 @@
         
          var socketService = {
             
+            chatadminid : 0,
+            chatadminname : '',
+            chatcustomerid : 0,
+            chatcustomername : '',
             getUserEnterprises : getUserEnterprises,
-            getEnterprise : getEnterprise
+            getEnterprise : getEnterprise,
+            getAvailableUsers : getAvailableUsers
         };
         
         return socketService;
@@ -60,7 +65,7 @@
             var httpPromise = $http({
                 
                 method : 'GET',
-                url : '/api/v1/enterprises/'+enterprisename
+                url : '/api/v1/enterprises/'+enterprisename+'/username/'+ApplicationContextService.globals.user
             }).then(function(response){
                 
                 return response.data;
@@ -71,6 +76,24 @@
             
             return httpPromise;
             
+        }
+        
+        function getAvailableUsers(){
+            
+            var httpPromise = $http({
+                
+                method : 'GET',
+                url : '/api/v1/availablecustomers'
+            }).then(function(response){
+                
+                return response.data;
+                
+            }, function(error){
+                
+                console.log(error);
+            });
+            
+            return httpPromise;
         }
         
     }

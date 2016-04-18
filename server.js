@@ -14,8 +14,8 @@
 
     var User = require('./app/models/User'),
         Message = require('./app/models/Message'),
-        Enterprise = require('./app/models/Enterprise');
-        
+        Enterprise = require('./app/models/Enterprise').model;
+
     app.use(express.static(__dirname + '/public'));
 
 
@@ -35,15 +35,17 @@
         User.findOneAndUpdate({
             username: req.query.username,
             password: req.query.password
-        },{isAvail : true }, function(err, user) {
+        }, {
+            isAvail: true
+        }, function(err, user) {
 
             if (user) {
 
-               
+
                 deferred.resolve({
                     isValid: true,
                     uid: user.uid,
-                    enterprise : user.enterprise
+                    enterprise: user.enterprise
                 });
 
             } else {
@@ -63,57 +65,102 @@
 
     });
 
-    app.get('/api/v1/getuserenterprises', function(req, res){
-        
-        
-        
-           var username = req.query.username;
-        
-        User.findOne({username :username }, function(err, user){
-            
-            if(user){
-                
-               console.log(user.chatenterprises);
-               res.json(user.chatenterprises);
-               
-            }
-            else {
-                
+    app.get('/api/v1/getuserenterprises', function(req, res) {
+
+
+
+        var username = req.query.username;
+
+        User.findOne({
+            username: username
+        }, function(err, user) {
+
+            if (user) {
+
+
+                res.json(user.chatenterprises);
+
+            } else {
+
                 res.json(null);
             }
         });
     });
-    
-    app.get('/api/v1/enterprises/:enterprisename', function(req, res){
-        
-       var name = req.params.enterprisename;
-       Enterprise.findOne({name : name }, function(err, enterprise){
-           
-           if(enterprise){
-               
-               res.json({enterprise : enterprise});
-           }
-           
-           else{
-               res.json(null);
-           }
-       })
-        
+
+    app.get('/api/v1/enterprises/:enterprisename/username/:username', function(req, res) {
+
+        var enterprisename = req.params.enterprisename,
+            username = req.params.username;
+        console.log(username);
+        Enterprise.findOne({
+            name: enterprisename
+        }, function(err, enterprise) {
+
+            if (enterprise) {
+
+                User.findOne({
+                    username: username
+                }, function(err, user) {
+
+
+                    if (user) {
+
+                        user.chatenterprises.push(enterprise);
+                        user.save(function(err) {
+                            if (err) {
+                                console.log(err);
+                            }
+                        });
+                    } else if (err) {
+
+                        console.log(err);
+
+                    }
+                });
+
+                res.json(enterprise);
+
+
+            } else {
+                res.json(null);
+            }
+        });
+
     });
-    
+
+
+    app.get('/api/v1/availablecustomers', function(req, res) {
+
+        User.find({
+            enterprise: 'customer',
+            isAvail: true
+        }, function(err, users) {
+
+            if (users) {
+
+                res.json(users);
+            } else {
+
+                res.json(null);
+            }
+
+        });
+
+    });
+
     io.on('connection', function(socket) {
 
         var web_clients = [];
-        
+
         socket.on('join', function(data) {
-            
-            console.log(typeof socket.id);
-            console.log(io.sockets.connected[socket.id].emit('abc'));
+
+            // console.log(typeof socket.id);
+            // console.log(io.sockets.connected[socket.id].emit('abc'));
             var client = {};
             client[data.uid] = socket.id;
             web_clients.push(client);
-            console.log(web_clients);
-            
+            //console.log(web_clients);
+
         });
     });
 

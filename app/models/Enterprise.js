@@ -1,14 +1,20 @@
 (function(){
     'use strict';
     
-    var mongoose = require('mongoose');
+    var mongoose = require('mongoose'),
     
-    module.exports = mongoose.Schema({
+        EnterpriseSchema = mongoose.Schema({
         
             name : String,
             enterpriseId : Number,
             enterpriseadmin : String
             
         });
+        
+        module.exports={
+            
+            model : mongoose.model('Enterprise', EnterpriseSchema),
+            EnterpriseSchema : EnterpriseSchema
+        } 
     
 })();

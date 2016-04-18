@@ -26,9 +26,9 @@
     <div class="row">
         <div class="col-md-offset-2 col-md-8">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search Company ... "/>
+                <input type="text" class="form-control" ng-model="searchCtrl.enterprisename"  placeholder="Search Company ... "/>
                 <span class="input-group-btn">
-                    <button type="button" class="btn btn-primary" ng-click=>Go</button>
+                    <button type="button" class="btn btn-primary" ng-click="searchCtrl.addEnterprise(searchCtrl.enterprisename)">Go</button>
                 </span>
             </div>
         </div>
@@ -38,11 +38,11 @@
             <div class="col-md-offset-2 col-md-2">
                 <div class="table-responsive">
                     <table id="chatcompanies" class="table table-hover">
-                        <tr ng-repeat="e in searchCtrl.userenterprises">
+                        <tr ng-repeat="e in searchCtrl.userenterprises" ng-click="searchCtrl.activateChatAdmin(e.enterpriseId, e.name)">
                             <td>
                                 <p>{{e.name | uppercase}}</p>
                                 
-                                    <p><small><span class="glyphicon glyphicon-user"></span{{e.enterpriseadmin}}</small></p>
+                                    <p><small><span class="glyphicon glyphicon-user"></span>{{e.enterpriseadmin}}</small></p>
                                 
                             </td>
                         </tr>
@@ -105,9 +105,9 @@
                     </ul>
                 </div>
                 <div class="input-group" id="chatmessage">
-                    <input type="text" class="form-control" placeholder="Send Message ..."/>
+                    <input type="text" class="form-control" ng-model="searchCtrl.chatmessage" placeholder="Send Message ..."/>
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-primary">Send</button>
+                        <button type="button" class="btn btn-primary" ng-click="searchCtrl.sendMessage(searchCtrl.chatmessage)">Send</button>
                     </span>
                 </div>
             </div>

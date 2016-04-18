@@ -26,29 +26,10 @@
             <div class="col-md-offset-2 col-md-2">
                 <div class="table-responsive">
                     <table id="chatcustomers" class="table table-hover">
-                        <tr>
-                            <td>Amazon</td>
-                        </tr>
-                        <tr>
-                            <td>BestBuy</td>
-                        </tr>
-                        <tr>
-                            <td>Walmart</td>
-                        </tr>
-                        <tr>
-                            <td>WayFair</td>
-                        </tr>
-                        <tr>
-                            <td>Jet</td>
-                        </tr>
-                        <tr>
-                            <td>SnapDeal</td>
-                        </tr>
-                        <tr>
-                            <td>Flipkart</td>
-                        </tr>
-                        <tr>
-                            <td>Myntra</td>
+                        <tr ng-repeat="u in adminCtrl.availableusers" ng-click="adminCtrl.activateCustomer(u.uid, u.username)">
+                            <td>
+                                <p><span class="glyphicon glyphicon-user"></span> {{u.firstname | uppercase}} {{u.lastname | uppercase}}</p>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -109,9 +90,9 @@
                     </ul>
                 </div>
                 <div class="input-group" id="adminchatmessage">
-                    <input type="text" class="form-control" placeholder="Send Message ..."/>
+                    <input type="text" class="form-control" ng-model="adminCtrl.chatmessage" placeholder="Send Message ..."/>
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-primary">Send</button>
+                        <button type="button" class="btn btn-primary" ng-click="adminCtrl.sendMessage(adminCtrl.chatmessage)">Send</button>
                     </span>
                 </div>
             </div>

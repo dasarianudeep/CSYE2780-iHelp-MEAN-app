@@ -1,7 +1,7 @@
 (function(){
     'use strict';
     
-    var EnterpriseSchema = require('./Enterprise');
+    var EnterpriseSchema = require('./Enterprise').EnterpriseSchema;
     var mongoose = require('mongoose'),
         UserSchema = mongoose.Schema({
             firstname:String,
