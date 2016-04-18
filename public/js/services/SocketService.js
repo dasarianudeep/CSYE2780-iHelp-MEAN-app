@@ -20,15 +20,26 @@
             console.log('inn');
         });
         
+        socket.on('displayAtAdmin', function(data){
+            
+                console.log(data);
+        });
+        
+        socket.on('displayAtCustomer', function(data){
+            
+            
+        });
+        
+        
          var socketService = {
             
-            chatadminid : 0,
-            chatadminname : '',
-            chatcustomerid : 0,
-            chatcustomername : '',
+            chatadmin : { id : 0, name : ''},
+            chatcustomer : { id : 0, name : ''},
             getUserEnterprises : getUserEnterprises,
             getEnterprise : getEnterprise,
-            getAvailableUsers : getAvailableUsers
+            getAvailableUsers : getAvailableUsers,
+            sendMessageToAdmin : sendMessageToAdmin,
+            sendMessageToCustomer : sendMessageToCustomer
         };
         
         return socketService;
@@ -94,6 +105,38 @@
             });
             
             return httpPromise;
+        }
+        
+        function sendMessageToAdmin(chatmessage){
+            
+            // console.log(SocketService.chatadminname);
+            // console.log(SocketService.chatadminid);
+            
+            var msg = {
+                
+                receiver : socketService.chatadmin.name,
+                receiverid : socketService.chatadmin.id,
+                sender : ApplicationContextService.globals.user,
+                senderid : ApplicationContextService.globals.uid,
+                message : chatmessage
+            };
+            
+            socket.emit('sendAdmin', { data : msg });
+        }
+        
+        function sendMessageToCustomer(chatmessage){
+            
+            var msg = {
+                
+                receiver : socketService.chatcustomer.name,
+                receiverid : socketService.chatcustomer.id,
+                sender : ApplicationContextService.globals.user,
+                senderid : ApplicationContextService.globals.user,
+                message : chatmessage
+                
+            };
+            
+            socket.emit('sendCustomer', {data : msg});
         }
         
     }

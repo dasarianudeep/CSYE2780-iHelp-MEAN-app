@@ -25,14 +25,14 @@
         
         vm.activateChatAdmin = function(enterpriseId, enterprisename){
             
-            SocketService.chatadminname = enterprisename;
-            SocketService.chatadminid = enterpriseId;    
+            SocketService.chatadmin.name = enterprisename;
+            SocketService.chatadmin.id = enterpriseId;    
             
         };
         
-        vm.sendMessage = function(chatmessage){
+        vm.sendMessageToAdmin = function(chatmessage){
             
-            
+            SocketService.sendMessageToAdmin(chatmessage);
         };
         
          vm.addEnterprise = function(enterprisename){

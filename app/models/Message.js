@@ -6,7 +6,7 @@
             receiver : String,
             receiverid : Number,
             sender : String,
-            senderId : Number,
+            senderid : Number,
             message : String,
             date : {type : Date, default : Date.now}
         });

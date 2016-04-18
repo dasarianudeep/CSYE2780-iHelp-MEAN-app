@@ -148,19 +148,33 @@
 
     });
 
+    //Web Socket Event Handling via Socket.io
     io.on('connection', function(socket) {
 
         var web_clients = [];
 
         socket.on('join', function(data) {
 
-            // console.log(typeof socket.id);
-            // console.log(io.sockets.connected[socket.id].emit('abc'));
+            
             var client = {};
             client[data.uid] = socket.id;
             web_clients.push(client);
-            //console.log(web_clients);
+        
 
+        });
+        
+        socket.on('sendAdmin', function(data){
+            
+           console.log(data);
+           io.sockets.connected[data.receiverid].emit('displayAtAdmin', data);
+            
+        });
+        
+        socket.on('sendCustomer', function(data){
+            
+            console.log(data);
+            io.sockets.connected[data.receiverid].emit('displayAtCustomer', data);
+            
         });
     });
 

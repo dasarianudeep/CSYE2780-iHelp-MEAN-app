@@ -22,12 +22,12 @@
         vm.activateCustomer = function(uid, username){
             
                       
-            SocketService.chatcustomerid = uid;
-            SocketService.chatcustomername = username;
+            SocketService.chatcustomer.id= uid;
+            SocketService.chatcustomer.name = username;
             
         };
         
-        vm.sendMessage = function(chatmessage){
+        vm.sendMessageToCustomer = function(chatmessage){
             
             
         };

@@ -36,63 +36,26 @@
             </div>
             <div id="adminchatpanel" class="col-md-6">
                 <div id="adminchatlist">
-                    <ul class="media-list">
-                        <li class="media">
+                    <ul class="media-list" id="adminchats">
+                        <li class="media" ng-repeat="m in adminCtrl.adminmessages">
                             <div class="media-left">
                                 <a href="#">
-                                    <img class="media-object" src="images/user_avatar.png"/>
+                                    <img class="media-object" src="images/user_avatar.png">
                                 </a>
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading">Chat 1</h4>
+                                <p class="media-heading lead"><span class="glyphicon glyphicon-user"></span>{{ m.sender}}</p>
+                                <p>{{ m.message }}
+                                
                             </div>
                         </li>
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" src="images/user_avatar.png"/>
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">Chat 1</h4>
-                            </div>
-                        </li>
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" src="images/user_avatar.png"/>
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">Chat 1</h4>
-                            </div>
-                        </li>
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" src="images/user_avatar.png"/>
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">Chat 1</h4>
-                            </div>
-                        </li>
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" src="images/user_avatar.png"/>
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">Chat 1</h4>
-                            </div>
-                        </li>
+                       
                     </ul>
                 </div>
                 <div class="input-group" id="adminchatmessage">
                     <input type="text" class="form-control" ng-model="adminCtrl.chatmessage" placeholder="Send Message ..."/>
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-primary" ng-click="adminCtrl.sendMessage(adminCtrl.chatmessage)">Send</button>
+                        <button type="button" class="btn btn-primary" ng-click="adminCtrl.sendMessageToCustomer(adminCtrl.chatmessage)">Send</button>
                     </span>
                 </div>
             </div>
