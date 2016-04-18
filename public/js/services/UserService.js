@@ -24,7 +24,7 @@
                     password: password
                 }
             }).then(function(response) {
-
+                
                 ApplicationContextService.globals.user = username;
                 ApplicationContextService.globals.uid = response.data.uid;
                 return response.data;

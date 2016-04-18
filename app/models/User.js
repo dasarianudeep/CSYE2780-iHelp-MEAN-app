@@ -11,6 +11,7 @@
             uid : Number,
             enterprise : String,
             isAvail : Boolean,
+            chatenterprises : [EnterpriseSchema]
         });
         
     module.exports = mongoose.model('User', UserSchema);

@@ -12,11 +12,17 @@
             controllerAs : 'loginCtrl',
             templateUrl : './partials/home.html'
             
-        }).when('/search',{
+        }).when('/customersearch',{
             
             controller : 'SearchController',
             controllerAs : 'searchCtrl',
-            templateUrl : './partials/search.html'
+            templateUrl : './partials/customersearch.html'
+            
+        }).when('/admin',{
+            
+            controller : 'AdminController',
+            controllerAs : 'adminCtrl',
+            templateUrl : './partials/adminhome.html'
             
         }).otherwise({redirectTo : '/'});
        

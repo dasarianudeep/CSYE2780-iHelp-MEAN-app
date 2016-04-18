@@ -8,17 +8,22 @@ body{
     cursor : pointer;
 }
 
-#chatpanel{
+#chatpanel, #adminchatpanel{
     
     height : 350px;
 }
 
-#chatlist{
+#chatlist, #adminchatlist{
     
     height : 90%;
 }
 
-#chatmessage{
+#chatmessage, #adminchatmessage{
     
     height : 10%;
+}
+
+#chatcustomers tr{
+    
+    cursor: pointer;
 }

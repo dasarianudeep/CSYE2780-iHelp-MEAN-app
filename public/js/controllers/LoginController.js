@@ -13,8 +13,15 @@
             UserService.validateUser(user.name, user.password).then(function(response) {
 
                 if (response.isValid) {
-
-                    $location.path('/search');
+                    
+                    if(response.enterprise === 'customer'){
+                        $location.path('/customersearch');
+                    }
+                    else{
+                        
+                        $location.path('/admin');
+                    }
+                    
                 } else {
 
                     alert('Invalid Credentials');

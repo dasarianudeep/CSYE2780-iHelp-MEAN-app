@@ -3,41 +3,29 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand">iHelp</a>
-            </div>
+                </div>
+                
+                <ul class="nav navbar-nav">
+                    <li><a href="#/">HOME</a></li>
+                    <li class="active"><a href="#/admin">CHAT</a></li>
+                </ul>
             
-            <ul class="nav navbar-nav">
-                <li><a href="#/">HOME</a>
-                <li class="active"><a href="#/search">CONTACT</a>
-            </ul>
             
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href class="dropdown-toggle" data-toggle="dropdown">Me <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">My Chats</a></li>
-                        <li><a href="#">Sign Out </a></li>
+                        <li><a href="#">Sign Out</a></li> 
                     </ul>
-                    
                 </li>
             </ul>
-        </div>
+            </div>
     </nav>
     
     <div class="row">
-        <div class="col-md-offset-2 col-md-8">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search Company ... "/>
-                <span class="input-group-btn">
-                    <button type="button" class="btn btn-primary">Go</button>
-                </span>
-            </div>
-        </div>
-        </div>
-        <br/>
-        <div class="row">
             <div class="col-md-offset-2 col-md-2">
                 <div class="table-responsive">
-                    <table id="chatcompanies" class="table table-hover">
+                    <table id="chatcustomers" class="table table-hover">
                         <tr>
                             <td>Amazon</td>
                         </tr>
@@ -65,13 +53,13 @@
                     </table>
                 </div>
             </div>
-            <div id="chatpanel" class="col-md-6">
-                <div id="chatlist">
+            <div id="adminchatpanel" class="col-md-6">
+                <div id="adminchatlist">
                     <ul class="media-list">
                         <li class="media">
                             <div class="media-left">
                                 <a href="#">
-                                    <img class="media-object" src=""/>
+                                    <img class="media-object" src="images/user_avatar.png"/>
                                 </a>
                             </div>
                             <div class="media-body">
@@ -81,7 +69,7 @@
                         <li class="media">
                             <div class="media-left">
                                 <a href="#">
-                                    <img class="media-object" src=""/>
+                                    <img class="media-object" src="images/user_avatar.png"/>
                                 </a>
                             </div>
                             <div class="media-body">
@@ -91,7 +79,7 @@
                         <li class="media">
                             <div class="media-left">
                                 <a href="#">
-                                    <img class="media-object" src=""/>
+                                    <img class="media-object" src="images/user_avatar.png"/>
                                 </a>
                             </div>
                             <div class="media-body">
@@ -101,7 +89,7 @@
                         <li class="media">
                             <div class="media-left">
                                 <a href="#">
-                                    <img class="media-object" src=""/>
+                                    <img class="media-object" src="images/user_avatar.png"/>
                                 </a>
                             </div>
                             <div class="media-body">
@@ -111,7 +99,7 @@
                         <li class="media">
                             <div class="media-left">
                                 <a href="#">
-                                    <img class="media-object" src=""/>
+                                    <img class="media-object" src="images/user_avatar.png"/>
                                 </a>
                             </div>
                             <div class="media-body">
@@ -120,7 +108,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="input-group" id="chatmessage">
+                <div class="input-group" id="adminchatmessage">
                     <input type="text" class="form-control" placeholder="Send Message ..."/>
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-primary">Send</button>
@@ -128,5 +116,4 @@
                 </div>
             </div>
         </div>
-    
 </div>
