@@ -2,25 +2,41 @@
     'use strict';
     
     angular.module('iHelpApp')
-           .controller('SearchController', ['SocketService',SearchController]);
+           .controller('SearchController', ['$q','ApplicationContextService','SocketService',SearchController]);
            
-    function SearchController(SocketService){
+    function SearchController($q, ApplicationContextService, SocketService){
         
         
         var vm = this;
         
         vm.currentchatadmin = '';
-        // vm.userenterprises = function(username){
-            
-            
-        // }
+      
+        var deferred = $q.defer();
         
         SocketService.getUserEnterprises().then(function(response){
             
             vm.userenterprises = response;
+            deferred.resolve(response);
         }, function(error){
             
             console.log(error);
+            deferred.reject(error);
+        });
+        
+        deferred.then(function(response){
+            
+            var uid = ApplicationContextService.globals.uid,
+                enterpriseid= response[0].enterpriseId;
+                
+         SocketService.getMessages(uid, enterpriseid).then(function(response){
+             
+             vm.customermessages = response;
+             
+         }, function(error){
+             
+             console.log(error);
+             
+         });
         });
         
         vm.activateChatAdmin = function(enterpriseId, enterprisename){
@@ -58,8 +74,8 @@
                
         };
     
-    }
     
+    }
    
     
 })(angular);

@@ -8,7 +8,7 @@
     function SocketService($http, ApplicationContextService){
         
        
-        console.log('inside service');
+       
         var socket = io(),
             user = ApplicationContextService.globals.user,
             uid = ApplicationContextService.globals.uid;
@@ -16,9 +16,7 @@
         console.log(uid);
         socket.emit('join', {user : user, uid : uid });
         
-        socket.on('abc', function(){
-            console.log('inn');
-        });
+        
         
         socket.on('displayAtAdmin', function(data){
             
@@ -27,7 +25,7 @@
         
         socket.on('displayAtCustomer', function(data){
             
-            
+                console.log(data);
         });
         
         
@@ -39,7 +37,8 @@
             getEnterprise : getEnterprise,
             getAvailableUsers : getAvailableUsers,
             sendMessageToAdmin : sendMessageToAdmin,
-            sendMessageToCustomer : sendMessageToCustomer
+            sendMessageToCustomer : sendMessageToCustomer,
+            getMessages : getMessages
         };
         
         return socketService;
@@ -121,7 +120,21 @@
                 message : chatmessage
             };
             
-            socket.emit('sendAdmin', { data : msg });
+            socket.emit('sendAdmin', msg);
+            
+           $http({
+                
+                method : 'POST',
+                url : '/api/v1/messages',
+                data : msg
+            }).then(function(response){
+                
+                console.log(response.data);
+            }, function(error){
+                
+                console.log(error);
+                
+            });
         }
         
         function sendMessageToCustomer(chatmessage){
@@ -136,7 +149,41 @@
                 
             };
             
-            socket.emit('sendCustomer', {data : msg});
+            socket.emit('sendCustomer', msg);
+            
+            $http({
+                
+                method : 'POST',
+                url : '/api/v1/messages',
+                data : msg
+            }).then(function(response){
+                
+                console.log(response);
+                
+            }, function(error){
+                
+                console.log(error);
+                
+            });
+        }
+        
+        function getMessages(uid, enterpriseid){
+            
+            var httpPromise = $http({
+                
+                method : 'GET',
+                url : '/api/v1/messages/receiver/'+enterpriseid+'/sender/'+uid,
+                               
+            }).then(function(response){
+                
+                return response.data;
+                
+            }, function(error){
+                
+                console.log(error);
+                
+            });
+            
         }
         
     }
