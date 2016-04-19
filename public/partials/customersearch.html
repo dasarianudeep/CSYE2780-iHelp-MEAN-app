@@ -52,8 +52,8 @@
             <div id="chatpanel" class="col-md-6">
                 <div id="chatlist">
                     <ul class="list-group" id="customerchats">
-                       <li class="list-group-item" ng-repeat="m in searchCtrl.customermessages">
-                           <p class="lead"><span class="glyphicon glyphicon-user"></span>{{m.sender | uppercase}} &nbsp;&nbsp;&nbsp;<span class="text-center">{{m.message}}</span></p>
+                       <li class="list-group-item" ng-repeat="m in searchCtrl.customermessages | orderBy:'date'">
+                           <p><span class="glyphicon glyphicon-user"></span>&nbsp; {{m.sender | uppercase}} &nbsp;&nbsp;&nbsp;<span class="text-center">{{m.message}}</span></p>
                        </li>
                     </ul>
                 </div>

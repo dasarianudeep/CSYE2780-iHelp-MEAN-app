@@ -20,14 +20,14 @@
         socket.on('displayAtAdmin', function(data){
             
                 console.log(data);
-                var html = '<li class="list-group-item"><p class="lead"><span class="glyphicon glyphicon-user"></span>'+data.sender.toUpperCase()+'&nbsp;&nbsp;&nbsp;<span class="text-center">'+data.message+'</span></p></li>';
+                var html = '<li class="list-group-item"><p><span class="glyphicon glyphicon-user"></span>&nbsp;'+data.sender.toUpperCase()+'&nbsp;&nbsp;&nbsp;<span class="text-center">'+data.message+'</span></p></li>';
                 $("#adminchats").append(html);
         });
         
         socket.on('displayAtCustomer', function(data){
             
                 console.log(data);
-                var html = '<li class="list-group-item"><p class="lead"><span class="glyphicon glyphicon-user"></span>'+data.sender.toUpperCase()+'&nbsp;&nbsp;&nbsp;<span class="text-center">'+data.message+'</span></p></li>';
+                var html = '<li class="list-group-item"><p><span class="glyphicon glyphicon-user"></span>&nbsp;'+data.sender.toUpperCase()+'&nbsp;&nbsp;&nbsp;<span class="text-center">'+data.message+'</span></p></li>';
                 $("#customerchats").append(html);
                 
         });
@@ -190,6 +190,9 @@
                 console.log(error);
                 
             });
+            
+            
+            return httpPromise;
             
         }
         

@@ -188,7 +188,7 @@
         var senderid = req.params.senderid,
             receiverid = req.params.receiverid;
             
-            console.log(senderid);
+            
         Message.find({
             '$or': [{
                 receiverid: receiverid,
@@ -217,8 +217,6 @@
         //var web_clients = [];
 
         socket.on('join', function(data) {
-
-
 
             client[data.uid] = socket.id;
             console.log(client);
