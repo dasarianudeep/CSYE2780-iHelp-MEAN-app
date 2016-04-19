@@ -23,21 +23,21 @@
             deferred.reject(error);
         });
         
-        deferred.then(function(response){
+        // deferred.then(function(response){
             
-            var uid = ApplicationContextService.globals.uid,
-                enterpriseid= response[0].enterpriseId;
+        //     var uid = ApplicationContextService.globals.uid,
+        //         enterpriseid= response[0].enterpriseId;
                 
-         SocketService.getMessages(uid, enterpriseid).then(function(response){
+        //  SocketService.getMessages(uid, enterpriseid).then(function(response){
              
-             vm.customermessages = response;
+        //      vm.customermessages = response;
              
-         }, function(error){
+        //  }, function(error){
              
-             console.log(error);
+        //      console.log(error);
              
-         });
-        });
+        //  });
+        // });
         
         vm.activateChatAdmin = function(enterpriseId, enterprisename){
             

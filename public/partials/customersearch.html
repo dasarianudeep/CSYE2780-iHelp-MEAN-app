@@ -51,57 +51,12 @@
             </div>
             <div id="chatpanel" class="col-md-6">
                 <div id="chatlist">
-                    <ul class="media-list">
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" src=""/>
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">Chat 1</h4>
-                            </div>
-                        </li>
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" src=""/>
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">Chat 1</h4>
-                            </div>
-                        </li>
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" src=""/>
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">Chat 1</h4>
-                            </div>
-                        </li>
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" src=""/>
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">Chat 1</h4>
-                            </div>
-                        </li>
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" src=""/>
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">Chat 1</h4>
-                            </div>
-                        </li>
+                    <ul class="list-group" id="customerchats">
+                       <li class="list-group-item" ng-repeat="m in searchCtrl.customermessages">
+                           <p class="lead"><span class="glyphicon glyphicon-user"></span> &nbsp; {{m.sender | uppercase}}</p>
+                           <p class="text-center">{{m.message}}</p>
+                       </li>
+                       
                     </ul>
                 </div>
                 <div class="input-group" id="chatmessage">

@@ -2,10 +2,10 @@
     'use strict';
     
     angular.module('iHelpApp')
-           .controller('AdminController', ['$q','SocketService',AdminController]);
+           .controller('AdminController', ['$q','ApplicationContextService','SocketService',AdminController]);
     
     
-    function AdminController($q, SocketService){
+    function AdminController($q, ApplicationContextService,SocketService){
         
         var vm = this;
         
@@ -23,16 +23,28 @@
             
         });
         
-        deferred.then(function(responsne){
+        // deferred.then(function(responsne){
+            
+        //     var uid = response[0].uid,
+        //         enterpriseid = ApplicationContextService.globals.uid;
+            
+        //     SocketService.getMessages(uid, enterpriseid).then(function(response){
+                
+        //         vm.adminmessages = response;
+                
+        //     }, function(error){
+                
+        //         console.log(error);
+                
+        //     });
             
             
-            vm.adminmessages = response;
+        // }, function(error){
             
-        }, function(error){
+        //     console.log(error);
             
-            console.log(error);
-            
-        });
+        // });
+        
         vm.activateCustomer = function(uid, username){
             
                       
@@ -43,7 +55,7 @@
         
         vm.sendMessageToCustomer = function(chatmessage){
             
-            
+            SocketService.sendMessageToCustomer(chatmessage);
         };
     }
     

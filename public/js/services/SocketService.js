@@ -33,6 +33,7 @@
             
             chatadmin : { id : 0, name : ''},
             chatcustomer : { id : 0, name : ''},
+            messages : [],
             getUserEnterprises : getUserEnterprises,
             getEnterprise : getEnterprise,
             getAvailableUsers : getAvailableUsers,
@@ -121,7 +122,7 @@
             };
             
             socket.emit('sendAdmin', msg);
-            
+            socketService.messages.push(msg);
            $http({
                 
                 method : 'POST',
@@ -144,12 +145,13 @@
                 receiver : socketService.chatcustomer.name,
                 receiverid : socketService.chatcustomer.id,
                 sender : ApplicationContextService.globals.user,
-                senderid : ApplicationContextService.globals.user,
+                senderid : ApplicationContextService.globals.uid,
                 message : chatmessage
                 
             };
             
             socket.emit('sendCustomer', msg);
+            socketService.messages.push(msg);
             
             $http({
                 
@@ -176,6 +178,7 @@
                                
             }).then(function(response){
                 
+                socketService.messages = response.data;
                 return response.data;
                 
             }, function(error){

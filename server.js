@@ -38,10 +38,10 @@
         var flag = false;
             
         var deferred = $.Deferred();
-        User.findOne({
+        User.findOneAndUpdate({
             username: req.query.username,
             password: req.query.password
-        }, function(err, user) {
+        },{isAvail : true}, function(err, user) {
             
             console.log(err);
             if (user) {
@@ -157,7 +157,7 @@
 
     });
     
-    app.get('/api/v1/messages', function(req, res){
+    app.post('/api/v1/messages', function(req, res){
         
     
         var msg = req.body;
@@ -218,7 +218,7 @@
            var socketid = client[data.receiverid];
            console.log(socketid);
            console.log(typeof socketid);
-           //io.sockets.connected[socketid].emit('displayAtAdmin', data);
+           io.sockets.connected[socketid].emit('displayAtAdmin', data);
             
         });
         

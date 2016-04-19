@@ -37,18 +37,10 @@
             <div id="adminchatpanel" class="col-md-6">
                 <div id="adminchatlist">
                     <ul class="media-list" id="adminchats">
-                        <li class="media" ng-repeat="m in adminCtrl.adminmessages">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" src="images/user_avatar.png">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <p class="media-heading lead"><span class="glyphicon glyphicon-user"></span>{{ m.sender}}</p>
-                                <p>{{ m.message }}
-                                
-                            </div>
-                        </li>
+                       <li class="list-group" ng-repeat="m in adminCtrl.adminmessages">
+                           <p class="lead"><span class="glyphicon glyphicon-user"></span> &nbsp; {{m.sender | uppercase}}</p>
+                           <p class="text-center">{{m.message}}</p>
+                       </li>
                        
                     </ul>
                 </div>
