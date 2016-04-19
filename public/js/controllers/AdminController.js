@@ -51,6 +51,18 @@
             SocketService.chatcustomer.id= uid;
             SocketService.chatcustomer.name = username;
             
+            var enterpriseid = ApplicationContextService.globals.uid;
+            
+            SocketService.getMessages(uid, enterpriseid).then(function(response){
+                
+                vm.adminmessages = response;
+                
+            }, function(error){
+                
+                console.log(error);
+                
+            });
+            
         };
         
         vm.sendMessageToCustomer = function(chatmessage){

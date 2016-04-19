@@ -38,10 +38,8 @@
                 <div id="adminchatlist">
                     <ul class="media-list" id="adminchats">
                        <li class="list-group" ng-repeat="m in adminCtrl.adminmessages">
-                           <p class="lead"><span class="glyphicon glyphicon-user"></span> &nbsp; {{m.sender | uppercase}}</p>
-                           <p class="text-center">{{m.message}}</p>
+                           <p class="lead"><span class="glyphicon glyphicon-user"></span>{{m.sender | uppercase}} &nbsp;&nbsp;&nbsp;<span class="text-center">{{m.message}}</span></p>
                        </li>
-                       
                     </ul>
                 </div>
                 <div class="input-group" id="adminchatmessage">

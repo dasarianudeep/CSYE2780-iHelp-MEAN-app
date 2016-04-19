@@ -14,14 +14,16 @@
     var User = require('./app/models/User'),
         Message = require('./app/models/Message'),
         Enterprise = require('./app/models/Enterprise').model;
-        
+
     var client = {};
-    
-          
+
+
     //mongoose.set('debug', true);
     mongoose.connect(mongourl);
     app.use(express.static(__dirname + '/public'));
-    app.use(bodyParser.urlencoded({extended : true}));
+    app.use(bodyParser.urlencoded({
+        extended: true
+    }));
     app.use(bodyParser.json());
 
 
@@ -36,17 +38,18 @@
     app.get('/api/v1/validateuser', function(req, res) {
 
         var flag = false;
-            
+
         var deferred = $.Deferred();
         User.findOneAndUpdate({
             username: req.query.username,
             password: req.query.password
-        },{isAvail : true}, function(err, user) {
-            
-            console.log(err);
+        }, {
+            isAvail: true
+        }, function(err, user) {
+
             if (user) {
 
-                    
+
                 deferred.resolve({
                     isValid: true,
                     uid: user.uid,
@@ -63,13 +66,14 @@
         });
 
         deferred.then(function(val) {
-            console.log('rrrr');
+
             res.json(val);
+            
         }, function(val) {
-            console.log('tttt');
+
             res.json(val);
         });
-        
+
 
 
     });
@@ -156,78 +160,84 @@
         });
 
     });
-    
-    app.post('/api/v1/messages', function(req, res){
-        
-    
+
+    app.post('/api/v1/messages', function(req, res) {
+
+
         var msg = req.body;
-        Message.create(msg, function(err, message){
-            
-            if(message){
-                
-                res.json({created : true});
+        Message.create(msg, function(err, message) {
+
+            if (message) {
+
+                res.json({
+                    created: true
+                });
+            } else {
+
+                res.json({
+                    created: false
+                });
             }
-            else{
-                
-                res.json({created : false});
-            }
-        });
-    });
-    
-    
-    app.get('/api/v1/messages/receiver/:receiverid/sender/:senderid', function(err, messages){
-        
-       
-          var senderid = req.query.senderid;
-            
-        Message.find({'$or':[{receiverid : receiverid, senderid : senderid}, {receiverid : senderid, senderid : receiverid}]}, function(err, messages){
-            
-           if(messages){
-               
-               res.json(messages);
-           } 
-           else{
-               
-               res.json(null);
-           }
         });
     });
 
 
-   
-       //Web Socket Event Handling via Socket.io
+    app.get('/api/v1/messages/receiver/:receiverid/sender/:senderid', function(req, res) {
+
+
+        var senderid = req.params.senderid,
+            receiverid = req.params.receiverid;
+            
+            console.log(senderid);
+        Message.find({
+            '$or': [{
+                receiverid: receiverid,
+                senderid: senderid
+            }, {
+                receiverid: senderid,
+                senderid: receiverid
+            }]
+        }, function(err, messages) {
+
+            if (messages) {
+
+                res.json(messages);
+            } else {
+
+                res.json(null);
+            }
+        });
+    });
+
+
+
+    //Web Socket Event Handling via Socket.io
     io.on('connection', function(socket) {
 
         //var web_clients = [];
-     
+
         socket.on('join', function(data) {
 
-            
-            
+
+
             client[data.uid] = socket.id;
             console.log(client);
-            
-        
+
+
         });
-        
-        socket.on('sendAdmin', function(data){
-            
-           console.log(data);
-           console.log(data.receiverid);
-           console.log(typeof data.receiverid);
-           var socketid = client[data.receiverid];
-           console.log(socketid);
-           console.log(typeof socketid);
-           io.sockets.connected[socketid].emit('displayAtAdmin', data);
-            
+
+        socket.on('sendAdmin', function(data) {
+
+            var socketid = client[data.receiverid];
+            io.sockets.connected[socketid].emit('displayAtAdmin', data);
+
         });
-        
-        socket.on('sendCustomer', function(data){
-            
-            console.log(data);
+
+        socket.on('sendCustomer', function(data) {
+
             var socketid = client[data.receiverid];
             io.sockets.connected[socketid].emit('displayAtCustomer', data);
-            
+
         });
     });
 

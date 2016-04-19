@@ -42,7 +42,19 @@
         vm.activateChatAdmin = function(enterpriseId, enterprisename){
             
             SocketService.chatadmin.name = enterprisename;
-            SocketService.chatadmin.id = enterpriseId;    
+            SocketService.chatadmin.id = enterpriseId; 
+            
+            var uid = ApplicationContextService.globals.uid;
+            
+            SocketService.getMessages(uid, enterpriseId).then(function(response){
+                
+                vm.customermessages = response;
+                
+            }, function(error){
+                
+                console.log(error);
+                
+            });
             
         };
         
@@ -55,7 +67,7 @@
         
              SocketService.getEnterprise(enterprisename).then(function(response){
                  
-                 console.log(response);
+                 //console.log(response);
                  
                  if(response._id){
                      
