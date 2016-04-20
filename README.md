@@ -6,6 +6,6 @@ multiple representatives in a single session, intuitive chat notifications , abi
 customers, persistence of chat messages.
 The project helped me to gain considerable knowledge on Socket programming ; how to achieve full duplex, bi-directional communication 
 between client-server. 
-I have chosen MEAN stack attributing to its flexibility and simplicity over other mainstream stacks. It indeed makes your code isomorphic
+I have chosen MEAN stack attributing to its flexibility and simplicity over other mainstream stacks. It indeed made my code isomorphic
 
 Software Stack - NodeJS, ExpressJS, Socket.io, HTML5, CSS, jQuery, AngularJS
