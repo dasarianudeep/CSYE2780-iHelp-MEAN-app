@@ -11,15 +11,11 @@
             user = ApplicationContextService.globals.user,
             uid = ApplicationContextService.globals.uid;
         
-        console.log(uid);
+        
         socket.emit('join', {user : user, uid : uid });
         
          socket.on('displayAtCustomer', function(data){
             
-                console.log(data);
-                //var html = '<li class="list-group-item listitemscustomer"><p><span class="glyphicon glyphicon-user"></span>&nbsp;'+data.sender.toUpperCase()+'&nbsp;&nbsp;&nbsp;<span class="text-center">'+data.message+'</span></p></li>';
-               // $("#customerchats").append(html);
-               
                $scope.$apply(function(){
                    
                     vm.customermessages.push(data);
@@ -33,13 +29,8 @@
         vm.currentchatadmin = '';
         
         var deferred = $q.defer();
-        console.log(deferred);
+       
 
-        // $scope.$on('sendToCustomer', function(msg){
-        
-        //     vm.customermessages.push(msg);    
-            
-        // });
         vm.chatadmin = { id : 0, name : ''};
         var promise = SocketService.getUserEnterprises().then(function(response) {
 
@@ -81,7 +72,7 @@
         vm.activateChatAdmin = function(enterpriseId, enterprisename) {
             
             vm.customermessages = [];
-            $(".listitemscustomer").empty();
+           
             SocketService.chatadmin.name = enterprisename;
             SocketService.chatadmin.id = enterpriseId;
             
@@ -119,17 +110,13 @@
             vm.customermessages.push(msg);
              socket.emit('sendAdmin', msg);
             
-            // $rootScope.$broadcast('sendToAdmin', msg);
-            
-           // $("#customerchats").append('<li class="list-group-item listitemscustomer"><p><span class="glyphicon glyphicon-user"></span>&nbsp;'+user.toUpperCase()+'&nbsp;&nbsp;&nbsp;<span class="text-center">'+chatmessage+'</span></p></li>');
-            
         };
 
         vm.addEnterprise = function(enterprisename) {
 
             SocketService.getEnterprise(enterprisename).then(function(response) {
 
-                //console.log(response);
+              
 
                 if (response._id) {
 

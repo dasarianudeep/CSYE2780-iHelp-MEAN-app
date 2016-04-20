@@ -34,19 +34,6 @@
         vm.chatcustomer = { id : 0, name : ''};
         var deferred = $q.defer();
 
-        // $scope.$on('sendToAdmin', function(msg){
-           
-        //    console.log('inn');
-        //    vm.adminmessages.push(msg);
-            
-        // });
-        
-        //$scope.socketService = SocketService;
-       vm.socketService = SocketService;
-        //console.log(vm.socketServiceMessages);
-        
-       
-        
         var promise = SocketService.getAvailableUsers().then(function(response) {
 
             vm.availableusers = response;
@@ -86,27 +73,13 @@
 
         });
 
-        //  $scope.$watch(function(){
-            
-        //     return vm.socketService.message;
-            
-        // }, function(oldVal, newVal){
-            
-        //     console.log(vm.socketService.message);
-        //     if(oldVal !== newVal){
-        //         console.log('innnnnnnn');
-        //        vm.adminmessages.push(data);
-                
-        //     }
-            
-        // }, true);
-        
+       
         vm.activateCustomer = function(uid, username) {
 
             
             
             vm.adminmessages = [];
-            $(".listitemsadmin").empty();
+          
             SocketService.chatcustomer.id = uid;
             SocketService.chatcustomer.name = username;
             
@@ -149,9 +122,6 @@
             
             socket.emit('sendCustomer', msg);
             
-            // $rootScope.$broadcast('sendToCustomer', msg);
-            
-          // $("#adminchats").append('<li class="list-group-item listitemsadmin"><p><span class="glyphicon glyphicon-user"></span>&nbsp;'+user.toUpperCase()+'&nbsp;&nbsp;&nbsp;<span class="text-center">'+chatmessage+'</span></p></li>');
             
         };
     }
