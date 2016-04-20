@@ -27,7 +27,7 @@
                 <div class="table-responsive">
                     <table id="chatcustomers" class="table table-hover">
                         <tr ng-repeat="u in adminCtrl.availableusers" ng-click="adminCtrl.activateCustomer(u.uid, u.username)">
-                            <td>
+                            <td class="bg-info">
                                 <p><span class="glyphicon glyphicon-user"></span> {{u.firstname | uppercase}} {{u.lastname | uppercase}}</p>
                             </td>
                         </tr>
@@ -37,7 +37,7 @@
             <div id="adminchatpanel" class="col-md-6">
                 <div id="adminchatlist">
                     <ul class="media-list" id="adminchats">
-                       <li class="list-group" ng-repeat="m in adminCtrl.adminmessages | orderBy : 'date'">
+                       <li class="list-group-item listitemsadmin" ng-repeat="m in adminCtrl.adminmessages | orderBy : 'date'">
                            <p><span class="glyphicon glyphicon-user"></span>&nbsp; {{m.sender | uppercase}} &nbsp;&nbsp;&nbsp;<span class="text-center">{{m.message}}</span></p>
                        </li>
                     </ul>

@@ -5,39 +5,25 @@
            .service("SocketService", ['$http','ApplicationContextService',SocketService]);
            
            
-    function SocketService($http, ApplicationContextService){
+    function SocketService( $http, ApplicationContextService){
         
      
-        var socket = io(),
-            user = ApplicationContextService.globals.user,
-            uid = ApplicationContextService.globals.uid;
+        // var socket = io(),
+        //     user = ApplicationContextService.globals.user,
+        //     uid = ApplicationContextService.globals.uid;
         
-        console.log(uid);
-        socket.emit('join', {user : user, uid : uid });
+        // console.log(uid);
+        // socket.emit('join', {user : user, uid : uid });
         
         
-        
-        socket.on('displayAtAdmin', function(data){
-            
-                console.log(data);
-                var html = '<li class="list-group-item"><p><span class="glyphicon glyphicon-user"></span>&nbsp;'+data.sender.toUpperCase()+'&nbsp;&nbsp;&nbsp;<span class="text-center">'+data.message+'</span></p></li>';
-                $("#adminchats").append(html);
-        });
-        
-        socket.on('displayAtCustomer', function(data){
-            
-                console.log(data);
-                var html = '<li class="list-group-item"><p><span class="glyphicon glyphicon-user"></span>&nbsp;'+data.sender.toUpperCase()+'&nbsp;&nbsp;&nbsp;<span class="text-center">'+data.message+'</span></p></li>';
-                $("#customerchats").append(html);
-                
-        });
+       
         
         
          var socketService = {
             
             chatadmin : { id : 0, name : ''},
             chatcustomer : { id : 0, name : ''},
-            messages : [],
+            message : {admin:'', customer:''},
             getUserEnterprises : getUserEnterprises,
             getEnterprise : getEnterprise,
             getAvailableUsers : getAvailableUsers,
@@ -46,6 +32,27 @@
             getMessages : getMessages
         };
         
+         
+        // socket.on('displayAtAdmin', function(data){
+            
+        //         console.log(data);
+        //         var html = '<li class="list-group-item listitemsadmin"><p><span class="glyphicon glyphicon-user"></span>&nbsp;'+data.sender.toUpperCase()+'&nbsp;&nbsp;&nbsp;<span class="text-center">'+data.message+'</span></p></li>';
+        //        // $("#adminchats").append(html);
+               
+            
+                   
+        //            //socketService.message.admin = data;
+               
+               
+        // });
+        
+        // socket.on('displayAtCustomer', function(data){
+            
+        //         console.log(data);
+        //         //var html = '<li class="list-group-item listitemscustomer"><p><span class="glyphicon glyphicon-user"></span>&nbsp;'+data.sender.toUpperCase()+'&nbsp;&nbsp;&nbsp;<span class="text-center">'+data.message+'</span></p></li>';
+        //        // $("#customerchats").append(html);
+                
+        // });
         return socketService;
         
         //Function Implementations
@@ -125,8 +132,8 @@
                 message : chatmessage
             };
             
-            socket.emit('sendAdmin', msg);
-            socketService.messages.push(msg);
+            // socket.emit('sendAdmin', msg);
+            //socketService.messages.push(msg);
            $http({
                 
                 method : 'POST',
@@ -154,8 +161,8 @@
                 
             };
             
-            socket.emit('sendCustomer', msg);
-            socketService.messages.push(msg);
+            // socket.emit('sendCustomer', msg);
+            //socketService.messages.push(msg);
             
             $http({
                 
@@ -182,7 +189,7 @@
                                
             }).then(function(response){
                 
-                socketService.messages = response.data;
+               //socketService.messages = response.data;
                 return response.data;
                 
             }, function(error){
