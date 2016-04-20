@@ -1,6 +1,6 @@
 # CSYE2780-iHelp-MEAN-app
 
-The goal of the project is to simulate an Unified Interactive Chat NodeJS Application that lets customers to chat with multiple
+The goal of the project is to simulate an Unified Interactive Chat application in NodeJS that lets customers to chat with multiple
 customer care representatives of renowned Ecommere companies - Amazon, Ebay, Walmart etc. The web application caters chatting with
 multiple representatives in a single session, intuitive chat notifications , ability of representative to push realtime data to 
 customers, persistence of chat messages.
