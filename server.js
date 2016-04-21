@@ -18,7 +18,7 @@
     var client = {};
 
 
-    //mongoose.set('debug', true);
+    
     mongoose.connect(mongourl);
     app.use(express.static(__dirname + '/public'));
     app.use(bodyParser.urlencoded({
@@ -68,7 +68,7 @@
         deferred.then(function(val) {
 
             res.json(val);
-            
+
         }, function(val) {
 
             res.json(val);
@@ -187,8 +187,8 @@
 
         var senderid = req.params.senderid,
             receiverid = req.params.receiverid;
-            
-            
+
+
         Message.find({
             '$or': [{
                 receiverid: receiverid,
@@ -214,7 +214,7 @@
     //Web Socket Event Handling via Socket.io
     io.on('connection', function(socket) {
 
-        //var web_clients = [];
+        
 
         socket.on('join', function(data) {
 
