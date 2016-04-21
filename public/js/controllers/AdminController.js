@@ -2,10 +2,10 @@
     'use strict';
 
     angular.module('iHelpApp')
-        .controller('AdminController', ['$q', '$scope', '$rootScope', 'ApplicationContextService', 'SocketService', AdminController]);
+        .controller('AdminController', ['$q', '$scope', '$rootScope','$location','ApplicationContextService', 'SocketService', AdminController]);
 
 
-    function AdminController($q, $scope, $rootScope, ApplicationContextService, SocketService) {
+    function AdminController($q, $scope, $rootScope,$location,ApplicationContextService, SocketService) {
 
 
         var socket = io(),
@@ -75,6 +75,7 @@
 
             var uid = response[0].uid,
                 enterpriseid = ApplicationContextService.globals.uid;
+                
             SocketService.chatcustomer.id = uid;
             SocketService.chatcustomer.name = response[0].name;
             vm.chatcustomer.id = uid;
@@ -98,7 +99,22 @@
 
         });
 
-
+        vm.removeUser = function(event, uid, index){
+            
+            event.stopPropagation();
+            
+            vm.availableusers.splice(index, 1);
+            
+        };
+        
+        vm.signOut = function(event){
+            
+            event.preventDefault();
+            socket.emit('unjoin',{id : uid});
+            $location.path("/");
+            
+        };
+        
         vm.activateCustomer = function(uid, username, index) {
 
 

@@ -29,6 +29,7 @@
             sendMessageToAdmin: sendMessageToAdmin,
             sendMessageToCustomer: sendMessageToCustomer,
             getMessages: getMessages
+            //removeEnterprise : removeEnterprise
         };
 
         return socketService;
@@ -177,6 +178,12 @@
             return httpPromise;
 
         }
+        
+        // function removeEnterprise(enterpriseid){
+            
+            
+            
+        // }
 
     }
 

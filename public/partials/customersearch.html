@@ -14,7 +14,7 @@
                 <li class="dropdown">
                     <a href class="dropdown-toggle" data-toggle="dropdown"><span ng-bind="searchCtrl.user"></span><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Sign Out </a></li>
+                        <li><a href="#/" ng-click="searchCtrl.signOut($event);">Sign Out </a></li>
                     </ul>
                     
                 </li>
@@ -40,7 +40,7 @@
                         <tr ng-repeat="e in searchCtrl.userenterprises" ng-init="id='searchCtrl.row'+$index;noteid = 'searchCtrl.note'+e.enterpriseId" ng-click="searchCtrl.activateChatAdmin(e.enterpriseId, e.name, $index)">
                             
                             <td ng-class="{'bg-info':{{id}}}">
-                                
+                                <div class="pull-right"><button type="button" class="close" aria-label="Close" ng-click="searchCtrl.removeEnterprise($event, e.enterpriseId, $index);"><span>&times;</span></button></div>
                                 <p>{{e.name | uppercase}} &nbsp; <span ng-show="{{noteid}}" class="badge"><span ng-bind="{{noteid}}"></span></span></p>
                                 
                                  <p><small><span class="glyphicon glyphicon-user"></span>{{e.enterpriseadmin}}</small></p>

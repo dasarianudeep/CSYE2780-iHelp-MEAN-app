@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('iHelpApp')
-        .controller('SearchController', ['$q', '$scope', '$rootScope', 'ApplicationContextService', 'SocketService', SearchController]);
+        .controller('SearchController', ['$q', '$scope', '$rootScope','$location','ApplicationContextService', 'SocketService', SearchController]);
 
-    function SearchController($q, $scope, $rootScope, ApplicationContextService, SocketService) {
+    function SearchController($q, $scope, $rootScope,$location,ApplicationContextService, SocketService) {
 
 
         var socket = io(),
@@ -77,6 +77,7 @@
 
             var uid = ApplicationContextService.globals.uid,
                 enterpriseid = response[0].enterpriseId;
+                
             SocketService.chatadmin.name = response[0].name;
             SocketService.chatadmin.id = enterpriseid;
 
@@ -97,6 +98,28 @@
             console.log(error);
         });
 
+        vm.removeEnterprise = function(event, enterpriseId, index){
+            
+            event.stopPropagation();
+            
+            vm.userenterprises.splice(index, 1);
+            
+            
+            
+        };
+        
+        vm.signOut = function(event){
+            
+            event.preventDefault();
+            
+            socket.emit('unjoin',{id : uid});
+            
+            $location.path("/");
+            
+            
+                
+        };
+        
         vm.activateChatAdmin = function(enterpriseId, enterprisename, index) {
 
             for (var k in vm.userenterprises) {

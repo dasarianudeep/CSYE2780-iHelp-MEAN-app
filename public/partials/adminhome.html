@@ -15,7 +15,7 @@
                 <li class="dropdown">
                     <a href class="dropdown-toggle" data-toggle="dropdown"><span ng-bind="adminCtrl.user"></span><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Sign Out</a></li> 
+                        <li><a href="#/" ng-click="adminCtrl.signOut($event);">Sign Out</a></li> 
                     </ul>
                 </li>
             </ul>
@@ -28,6 +28,7 @@
                     <table id="chatcustomers" class="table table-hover">
                         <tr ng-repeat="u in adminCtrl.availableusers" ng-init="id='adminCtrl.row'+$index;noteid='adminCtrl.note'+u.uid " ng-click="adminCtrl.activateCustomer(u.uid, u.username, $index)">
                             <td ng-class="{'bg-info':{{id}}}">
+                               <div class="pull-right"><button type="button" class="close" aria-label="Close" ng-click="adminCtrl.removeUser($event, u.uid, $index);"><span>&times;</span></button></div>
                                 <p><span class="glyphicon glyphicon-user"></span> {{u.firstname | uppercase}} {{u.lastname | uppercase}}<span ng-show="{{noteid}}" class="badge"><span ng-bind="{{noteid}}"></span></span></p>
                             </td>
                         </tr>

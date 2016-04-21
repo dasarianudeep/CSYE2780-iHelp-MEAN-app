@@ -237,6 +237,13 @@
             io.sockets.connected[socketid].emit('displayAtCustomer', data);
 
         });
+        
+        socket.on('unjoin', function(data){
+            
+          delete client[data.id];
+           socket.disconnect();
+           
+        });
     });
 
     httpServer.listen(3000, function() {
