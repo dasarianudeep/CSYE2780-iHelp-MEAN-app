@@ -13,7 +13,7 @@
             
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href class="dropdown-toggle" data-toggle="dropdown">Me <span class="caret"></span></a>
+                    <a href class="dropdown-toggle" data-toggle="dropdown"><span ng-bind="adminCtrl.user"></span><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Sign Out</a></li> 
                     </ul>
@@ -26,9 +26,9 @@
             <div class="col-md-offset-2 col-md-2">
                 <div class="table-responsive">
                     <table id="chatcustomers" class="table table-hover">
-                        <tr ng-repeat="u in adminCtrl.availableusers" ng-click="adminCtrl.activateCustomer(u.uid, u.username)">
-                            <td class="bg-info">
-                                <p><span class="glyphicon glyphicon-user"></span> {{u.firstname | uppercase}} {{u.lastname | uppercase}}</p>
+                        <tr ng-repeat="u in adminCtrl.availableusers" ng-init="id='adminCtrl.row'+$index;noteid='adminCtrl.note'+u.uid " ng-click="adminCtrl.activateCustomer(u.uid, u.username, $index)">
+                            <td ng-class="{'bg-info':{{id}}}">
+                                <p><span class="glyphicon glyphicon-user"></span> {{u.firstname | uppercase}} {{u.lastname | uppercase}}<span ng-show="{{noteid}}" class="badge"><span ng-bind="{{noteid}}"></span></span></p>
                             </td>
                         </tr>
                     </table>

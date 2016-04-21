@@ -11,20 +11,35 @@
             user = ApplicationContextService.globals.user,
             uid = ApplicationContextService.globals.uid;
         
-        
+        var vm = this;
+        vm.user = user;
         socket.emit('join', {user : user, uid : uid });
         
          socket.on('displayAtCustomer', function(data){
             
-               $scope.$apply(function(){
+              
+               
+               if(data.senderid === vm.chatadmin.id){
+                   
+                $scope.$apply(function(){
                    
                     vm.customermessages.push(data);
+                    
                });
+               }
+               else{
+                   
+                   $scope.$apply(function(){
+                       
+                       vm['note'+data.senderid]++;
+                   });
+                   
+               }
               
                 
         });
 
-        var vm = this;
+        
 
         vm.currentchatadmin = '';
         
@@ -35,6 +50,14 @@
         var promise = SocketService.getUserEnterprises().then(function(response) {
 
             vm.userenterprises = response;
+            vm.row0 = true;
+            
+            for(var k in vm.userenterprises){
+                
+             vm['note'+vm.userenterprises[k].enterpriseId] = 0;
+                
+            }
+            
             deferred.resolve(response);
             return deferred.promise;
         }, function(error) {
@@ -69,7 +92,14 @@
             console.log(error);
         });
 
-        vm.activateChatAdmin = function(enterpriseId, enterprisename) {
+        vm.activateChatAdmin = function(enterpriseId, enterprisename, index) {
+            
+            for(var k in vm.userenterprises){
+                
+                vm['row'+k] = false;
+            }
+            vm['row'+index] = true;
+            vm['note'+enterpriseId] = 0;
             
             vm.customermessages = [];
            
@@ -124,6 +154,7 @@
                 }
 
                 vm.userenterprises.push(response);
+                
 
                 vm.enterprisename = '';
 

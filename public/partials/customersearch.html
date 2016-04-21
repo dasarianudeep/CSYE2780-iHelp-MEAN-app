@@ -12,9 +12,8 @@
             
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href class="dropdown-toggle" data-toggle="dropdown">Me <span class="caret"></span></a>
+                    <a href class="dropdown-toggle" data-toggle="dropdown"><span ng-bind="searchCtrl.user"></span><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">My Chats</a></li>
                         <li><a href="#">Sign Out </a></li>
                     </ul>
                     
@@ -38,11 +37,13 @@
             <div class="col-md-offset-2 col-md-2">
                 <div class="table-responsive">
                     <table id="chatcompanies" class="table table-hover">
-                        <tr ng-repeat="e in searchCtrl.userenterprises" ng-click="searchCtrl.activateChatAdmin(e.enterpriseId, e.name)">
-                            <td>
-                                <p>{{e.name | uppercase}}</p>
+                        <tr ng-repeat="e in searchCtrl.userenterprises" ng-init="id='searchCtrl.row'+$index;noteid = 'searchCtrl.note'+e.enterpriseId" ng-click="searchCtrl.activateChatAdmin(e.enterpriseId, e.name, $index)">
+                            
+                            <td ng-class="{'bg-info':{{id}}}">
                                 
-                                    <p><small><span class="glyphicon glyphicon-user"></span>{{e.enterpriseadmin}}</small></p>
+                                <p>{{e.name | uppercase}} &nbsp; <span ng-show="{{noteid}}" class="badge"><span ng-bind="{{noteid}}"></span></span></p>
+                                
+                                 <p><small><span class="glyphicon glyphicon-user"></span>{{e.enterpriseadmin}}</small></p>
                                 
                             </td>
                         </tr>

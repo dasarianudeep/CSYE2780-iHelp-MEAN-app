@@ -11,32 +11,52 @@
         var socket = io(),
             user = ApplicationContextService.globals.user,
             uid = ApplicationContextService.globals.uid;
+             var vm = this;
         
-        console.log(uid);
+        vm.user = user;
         socket.emit('join', {user : user, uid : uid });
         
          socket.on('displayAtAdmin', function(data){
             
-                console.log(data);
-                //var html = '<li class="list-group-item listitemscustomer"><p><span class="glyphicon glyphicon-user"></span>&nbsp;'+data.sender.toUpperCase()+'&nbsp;&nbsp;&nbsp;<span class="text-center">'+data.message+'</span></p></li>';
-               // $("#customerchats").append(html);
-               
-               $scope.$apply(function(){
+              if(data.senderid === vm.chatcustomer.id){
+                  
+                   $scope.$apply(function(){
+                       
                    vm.adminmessages.push(data);
                });
+                  
+              }
+              else{
+                  
+                  $scope.$apply(function(){
+                      
+                     vm['note'+data.senderid]++;
+                      
+                  });
+                  
+              }
+              
                
                 
         });
 
-        var vm = this;
+       
         
         
         vm.chatcustomer = { id : 0, name : ''};
         var deferred = $q.defer();
+       
 
         var promise = SocketService.getAvailableUsers().then(function(response) {
 
             vm.availableusers = response;
+             vm.row0 = true;
+             
+             for(var k in vm.availableusers){
+                 
+                 vm['note'+vm.availableusers[k].uid] = 0;
+             }
+             
             deferred.resolve(response);
             return deferred.promise;
         }, function(error) {
@@ -74,10 +94,15 @@
         });
 
        
-        vm.activateCustomer = function(uid, username) {
+        vm.activateCustomer = function(uid, username, index) {
 
             
-            
+            for(var k in vm.availableusers){
+                
+                vm['row'+k] = false;
+            }
+            vm['row'+index] = true;
+            vm['note'+uid] = 0;
             vm.adminmessages = [];
           
             SocketService.chatcustomer.id = uid;
