@@ -211,12 +211,18 @@
 
             SocketService.getEnterprise(enterprisename).then(function(response) {
 
-
+                var enterpriseFound = vm.userenterprises.find(function(e){
+                    
+                        return e.name === vm.enterprisename;
+                });
+                console.log(enterpriseFound);
 
                 if (response._id) {
 
                     delete response._id;
                 }
+                
+                
                   if(vm.userenterprises.length === 0){
                 
                     console.log('inn');

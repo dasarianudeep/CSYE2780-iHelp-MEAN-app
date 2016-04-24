@@ -69,9 +69,7 @@
                     }
                     vm['note'+data.uid] = 0;
                     vm.availableusers.push(data);
-                    
-                    
-                
+                   
                 });
             
             }
