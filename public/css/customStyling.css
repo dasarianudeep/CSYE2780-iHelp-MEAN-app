@@ -16,6 +16,7 @@ body{
 #chatlist, #adminchatlist{
     
     height : 90%;
+    overflow-y: auto;
 }
 
 #chatmessage, #adminchatmessage{

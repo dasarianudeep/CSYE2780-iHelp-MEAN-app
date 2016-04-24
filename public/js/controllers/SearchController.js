@@ -9,24 +9,49 @@
 
         var socket = io(),
             user = ApplicationContextService.globals.user,
-            uid = ApplicationContextService.globals.uid;
-
+            uid = ApplicationContextService.globals.uid,
+            userObj = ApplicationContextService.globals.userObj;
+            
+        console.log(userObj);
         var vm = this;
         vm.user = user;
         socket.emit('join', {
             user: user,
-            uid: uid
+            uid: uid,
+            userObj : userObj
         });
-
+        
+        $scope.service = ApplicationContextService;
+        // $scope.$watch(function(){
+            
+        //     return $scope.service.globals.user;
+            
+        // }, function(newVal, oldVal){
+            
+        //     if(oldVal !== newVal){
+                
+        //         console.log(oldVal);
+        //         console.log(newVal);
+        //     }
+        // });
+        
         socket.on('displayAtCustomer', function(data) {
 
 
-
+             console.log(vm.chatadmin.id);
+             console.log(data.senderid);
             if (data.senderid === vm.chatadmin.id) {
-
+                
+               
+                
                 $scope.$apply(function() {
-
+                       
+                      if(vm.customermessages){ 
                     vm.customermessages.push(data);
+                      }
+                      else{
+                          vm.customermessages = [data];
+                      }
 
                 });
             } else {
@@ -75,8 +100,10 @@
 
         promise.then(function(response) {
 
-            var uid = ApplicationContextService.globals.uid,
-                enterpriseid = response[0].enterpriseId;
+            var uid = ApplicationContextService.globals.uid;
+            
+            if(response.length > 0){
+                var enterpriseid = response[0].enterpriseId;
                 
             SocketService.chatadmin.name = response[0].name;
             SocketService.chatadmin.id = enterpriseid;
@@ -93,6 +120,7 @@
                 console.log(error);
 
             });
+        }
         }, function(error) {
 
             console.log(error);
@@ -165,12 +193,19 @@
                 message: chatmessage
             };
 
-            vm.customermessages.push(msg);
+             if(vm.customermessages){ 
+                    vm.customermessages.push(msg);
+                      }
+                      else{
+                          vm.customermessages = [msg];
+                      }
             socket.emit('sendAdmin', msg);
 
         };
 
         vm.addEnterprise = function(enterprisename) {
+            
+           
 
             SocketService.getEnterprise(enterprisename).then(function(response) {
 
@@ -180,10 +215,19 @@
 
                     delete response._id;
                 }
+                  if(vm.userenterprises.length === 0){
+                
+                    console.log('inn');
+                    vm.chatadmin.name = response.name;
+                    vm.chatadmin.id = response.enterpriseId;
+                    SocketService.chatadmin.name = response.name;
+                    SocketService.chatadmin.id = response.enterpriseId;
+            }
+
 
                 vm.userenterprises.push(response);
-
-
+             
+               
                 vm.enterprisename = '';
 
             }, function(error) {

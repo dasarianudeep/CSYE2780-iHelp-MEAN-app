@@ -15,6 +15,7 @@
                 if (response.isValid) {
                     
                     if(response.enterprise === 'customer'){
+                        
                         $location.path('/customersearch');
                     }
                     else{

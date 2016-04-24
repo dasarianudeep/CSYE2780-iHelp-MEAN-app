@@ -53,7 +53,8 @@
                 deferred.resolve({
                     isValid: true,
                     uid: user.uid,
-                    enterprise: user.enterprise
+                    enterprise: user.enterprise,
+                    user : user
                 });
 
             } else {
@@ -104,7 +105,8 @@
 
         var enterprisename = req.params.enterprisename,
             username = req.params.username;
-        console.log(username);
+       
+       
         Enterprise.findOne({
             name: enterprisename
         }, function(err, enterprise) {
@@ -166,7 +168,8 @@
 
         var msg = req.body;
         Message.create(msg, function(err, message) {
-
+                
+                console.log(message);
             if (message) {
 
                 res.json({
@@ -220,19 +223,23 @@
 
             client[data.uid] = socket.id;
             console.log(client);
-
+            console.log(data.userObj);
+            
+            socket.broadcast.emit('updateCustomers', data.userObj);
 
         });
 
         socket.on('sendAdmin', function(data) {
-
+                    
+                    
             var socketid = client[data.receiverid];
             io.sockets.connected[socketid].emit('displayAtAdmin', data);
 
         });
 
         socket.on('sendCustomer', function(data) {
-
+                
+                
             var socketid = client[data.receiverid];
             io.sockets.connected[socketid].emit('displayAtCustomer', data);
 

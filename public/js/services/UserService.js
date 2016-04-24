@@ -25,8 +25,10 @@
                 }
             }).then(function(response) {
                 
+                console.log(response.data.user);
                 ApplicationContextService.globals.user = username;
                 ApplicationContextService.globals.uid = response.data.uid;
+               ApplicationContextService.globals.userObj = response.data.user;
                 return response.data;
 
             }, function(error) {

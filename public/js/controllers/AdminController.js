@@ -25,7 +25,12 @@
 
                 $scope.$apply(function() {
 
+                     if(vm.adminmessages){ 
                     vm.adminmessages.push(data);
+                      }
+                      else{
+                          vm.adminmessages = [data];
+                      }
                 });
 
             } else {
@@ -40,6 +45,33 @@
 
 
 
+        });
+        
+        socket.on('updateCustomers', function(data){
+            
+            console.log(data);
+            
+           
+            if(data){
+                
+                $scope.$apply(function(){
+                    
+                    if(vm.availableusers.length === 0){
+                        
+                    SocketService.chatcustomer.id = data.uid;
+                    SocketService.chatcustomer.name = data.username;
+                    
+                    }
+                    vm.availableusers.push(data);
+                    vm.chatcustomer.id = data.uid;
+                    vm.chatcustomer.name = data.username;
+                    
+                
+                });
+            
+            }
+            
+            
         });
 
 
@@ -73,9 +105,12 @@
 
         promise.then(function(response) {
 
-            var uid = response[0].uid,
-                enterpriseid = ApplicationContextService.globals.uid;
+           
+                var enterpriseid = ApplicationContextService.globals.uid;
                 
+                if(response.length > 0) {
+                    
+                 var uid = response[0].uid;
             SocketService.chatcustomer.id = uid;
             SocketService.chatcustomer.name = response[0].name;
             vm.chatcustomer.id = uid;
@@ -91,6 +126,8 @@
                 console.log(error);
 
             });
+            
+        }
 
 
         }, function(error) {
@@ -164,7 +201,12 @@
 
             };
 
-            vm.adminmessages.push(msg);
+            if(vm.adminmessages){ 
+                    vm.adminmessages.push(msg);
+                      }
+                      else{
+                          vm.adminmessages = [msg];
+                      }
 
             socket.emit('sendCustomer', msg);
 
