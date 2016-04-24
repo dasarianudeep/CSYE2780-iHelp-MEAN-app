@@ -23,19 +23,19 @@
     </nav>
     
     <div class="row">
-            <div class="col-md-offset-2 col-md-2">
+            <div class="col-md-offset-2 col-md-3">
                 <div class="table-responsive">
                     <table id="chatcustomers" class="table table-hover">
                         <tr ng-repeat="u in adminCtrl.availableusers" ng-init="id='adminCtrl.row'+$index;noteid='adminCtrl.note'+u.uid " ng-click="adminCtrl.activateCustomer(u.uid, u.username, $index)">
                             <td ng-class="{'bg-info':{{id}}}">
                                <div class="pull-right"><button type="button" class="close" aria-label="Close" ng-click="adminCtrl.removeUser($event, u.uid, $index);"><span>&times;</span></button></div>
-                                <p><span class="glyphicon glyphicon-user"></span> {{u.firstname | uppercase}} {{u.lastname | uppercase}}<span ng-show="{{noteid}}" class="badge"><span ng-bind="{{noteid}}"></span></span></p>
+                                <p><span class="glyphicon glyphicon-user"></span> {{u.firstname | uppercase}} {{u.lastname | uppercase}} &nbsp; &nbsp;<span ng-show="{{noteid}}" class="badge"><span ng-bind="{{noteid}}"></span></span></p>
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
-            <div id="adminchatpanel" class="col-md-6">
+            <div id="adminchatpanel" class="col-md-5">
                 <div id="adminchatlist">
                     <ul class="media-list" id="adminchats">
                        <li class="list-group-item listitemsadmin" ng-repeat="m in adminCtrl.adminmessages | orderBy : 'date'">
