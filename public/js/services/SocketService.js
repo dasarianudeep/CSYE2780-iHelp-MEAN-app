@@ -28,7 +28,8 @@
             getAvailableUsers: getAvailableUsers,
             sendMessageToAdmin: sendMessageToAdmin,
             sendMessageToCustomer: sendMessageToCustomer,
-            getMessages: getMessages
+            getMessages: getMessages,
+            updateAvail : updateAvail
             //removeEnterprise : removeEnterprise
         };
 
@@ -178,6 +179,28 @@
             return httpPromise;
 
         }
+        
+        function updateAvail(uid){
+            
+            var httpPromise = $http({
+                
+                url : '/api/v1/updateavail/'+uid,
+                method : 'GET'
+                
+            }).then(function(response){
+                
+                return response.data;
+                
+            }, function(error){
+                
+                console.log(error);
+                
+            });
+            
+            return httpPromise;
+            
+        }
+        
         
         // function removeEnterprise(enterpriseid){
             

@@ -50,6 +50,31 @@
 
         });
         
+        
+        socket.on('removeCustomers', function(data){
+            
+           
+         
+           
+           $scope.$apply(function(){
+               
+                  
+                var i = vm.availableusers.findIndex(function(user){
+                    console.log(user.username);
+                    console.log(data.user.username);
+                    return user.username === data.user.username;
+                }) ;
+                
+                console.log(i);
+                console.log(vm.availableusers);
+                vm.availableusers.splice(i, 1);
+                console.log(vm.availableusers);
+               
+           });
+           
+           
+        });
+        
         socket.on('updateCustomers', function(data){
             
             console.log(data);

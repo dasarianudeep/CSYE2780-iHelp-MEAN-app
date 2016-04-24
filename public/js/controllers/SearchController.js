@@ -35,6 +35,7 @@
         //     }
         // });
         
+        vm.isFound = true;
         socket.on('displayAtCustomer', function(data) {
 
 
@@ -140,7 +141,17 @@
             
             event.preventDefault();
             
-            socket.emit('unjoin',{id : uid});
+            socket.emit('unjoin',{id : uid, user : userObj});
+            
+            SocketService.updateAvail(uid).then(function(response){
+                
+                console.log(response);
+                
+            }, function(error){
+                
+                console.log(error);
+                
+            });
             
             $location.path("/");
             
@@ -215,8 +226,16 @@
                     
                         return e.name === vm.enterprisename;
                 });
-                console.log(enterpriseFound);
-
+                
+                if(enterpriseFound){
+                    
+                    vm.isFound = false;
+                    return;
+                }
+                
+                
+                vm.isFound = true;
+                
                 if (response._id) {
 
                     delete response._id;
@@ -225,7 +244,7 @@
                 
                   if(vm.userenterprises.length === 0){
                 
-                    console.log('inn');
+                    
                     vm.chatadmin.name = response.name;
                     vm.chatadmin.id = response.enterpriseId;
                     SocketService.chatadmin.name = response.name;

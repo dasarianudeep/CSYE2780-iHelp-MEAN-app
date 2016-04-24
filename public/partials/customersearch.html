@@ -30,6 +30,9 @@
                     <button type="button" class="btn btn-primary" ng-click="searchCtrl.addEnterprise(searchCtrl.enterprisename)">Go</button>
                 </span>
             </div>
+            <div>
+                <p ng-hide="searchCtrl.isFound" class="text-center alert alert-warning">Oops!!! You had already connected</p>
+            </div>
         </div>
         </div>
         <br/>

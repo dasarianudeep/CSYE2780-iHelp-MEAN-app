@@ -211,6 +211,26 @@
             }
         });
     });
+    
+    
+    app.get('/api/v1/updateavail/:uid', function(req, res){
+        
+        var uid = req.params.uid;
+        console.log(uid);
+        
+        User.findOneAndUpdate({uid : uid}, {isAvail : false}, function(err, user){
+            
+            if(user){
+                
+                res.json({updated : true});
+            }
+            else {
+                
+                res.json(null);
+            }
+        });
+        
+    });
 
 
 
@@ -224,7 +244,7 @@
             console.log(data);
             client[data.uid] = socket.id;
             console.log(client);
-            console.log(data.userObj);
+           // console.log(data.userObj);
             
             socket.broadcast.emit('updateCustomers', data.userObj);
 
@@ -249,6 +269,9 @@
         socket.on('unjoin', function(data){
             
           delete client[data.id];
+          console.log(client);
+          console.log(data.user);
+          socket.broadcast.emit('removeCustomers', {user : data.user});
            socket.disconnect();
            
         });
