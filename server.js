@@ -220,7 +220,8 @@
         
 
         socket.on('join', function(data) {
-
+            
+            console.log(data);
             client[data.uid] = socket.id;
             console.log(client);
             console.log(data.userObj);

@@ -58,7 +58,7 @@
 
                 $scope.$apply(function() {
 
-                    vm['note' + data.senderid]++;
+                    vm['note'+data.senderid]++;
                 });
 
             }
@@ -200,6 +200,8 @@
                           vm.customermessages = [msg];
                       }
             socket.emit('sendAdmin', msg);
+            
+            vm.chatmessage = '';
 
         };
 
@@ -224,7 +226,7 @@
                     SocketService.chatadmin.id = response.enterpriseId;
             }
 
-
+                vm['note'+response.enterpriseId] = 0;
                 vm.userenterprises.push(response);
              
                

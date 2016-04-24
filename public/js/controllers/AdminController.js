@@ -20,7 +20,9 @@
         });
 
         socket.on('displayAtAdmin', function(data) {
-
+            
+            console.log(data.senderid);
+            console.log(vm.chatcustomer.id);
             if (data.senderid === vm.chatcustomer.id) {
 
                 $scope.$apply(function() {
@@ -36,8 +38,9 @@
             } else {
 
                 $scope.$apply(function() {
-
-                    vm['note' + data.senderid]++;
+                            console.log('111');
+                    console.log(vm['note'+data.senderid]);
+                    vm['note'+data.senderid]++;
 
                 });
 
@@ -60,11 +63,13 @@
                         
                     SocketService.chatcustomer.id = data.uid;
                     SocketService.chatcustomer.name = data.username;
-                    
-                    }
-                    vm.availableusers.push(data);
                     vm.chatcustomer.id = data.uid;
                     vm.chatcustomer.name = data.username;
+                    
+                    }
+                    vm['note'+data.uid] = 0;
+                    vm.availableusers.push(data);
+                    
                     
                 
                 });
@@ -209,6 +214,7 @@
                       }
 
             socket.emit('sendCustomer', msg);
+            vm.chatmessage = '';
 
 
         };
